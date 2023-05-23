@@ -99,6 +99,10 @@ const Game = (() => {
     }
 
     const restart = () => {
+        if (player1.value === '' || player2.value === '') {
+            alert('Input all players!')
+            return
+        }
         for (let i = 0; i < 9; i++) {
             GameBoard.update(i, '')
         }
