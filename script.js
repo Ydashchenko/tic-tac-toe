@@ -49,6 +49,14 @@ const Game = (() => {
     let gameOver;
 
     const start = () => {
+        let player1 = document.querySelector('#player1').value
+        let player2 = document.querySelector('#player2').value
+
+        if (player1 === '' || player2 === '') {
+            alert('Input all players!')
+            return
+        }
+
         players = [
             createPlayer(document.querySelector('#player1').value, 'X'),
             createPlayer(document.querySelector('#player2').value, 'O'),
