@@ -1,0 +1,26 @@
+#gameboard {
+    display: grid;
+    grid-template-columns: repeat(3, 100px);
+    grid-template-rows: repeat(3, 1fr);
+    margin-bottom: 20px;
+}
+
+.square {
+    width: 100px;
+    height: 100px;
+}
+
+#square-4 {
+    border: 1px solid black;
+}
+
+#square-1, #square-7 {
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+}
+
+#square-3, #square-5 {
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+}
+
