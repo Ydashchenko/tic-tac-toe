@@ -47,19 +47,18 @@ const Game = (() => {
     let players = [];
     let currentPlayerIndex;
     let gameOver;
+    let player1 = document.querySelector('#player1')
+    let player2 = document.querySelector('#player2')
 
     const start = () => {
-        let player1 = document.querySelector('#player1').value
-        let player2 = document.querySelector('#player2').value
-
-        if (player1 === '' || player2 === '') {
+        if (player1.value === '' || player2.value === '') {
             alert('Input all players!')
             return
         }
 
         players = [
-            createPlayer(document.querySelector('#player1').value, 'X'),
-            createPlayer(document.querySelector('#player2').value, 'O'),
+            createPlayer(player1.value, 'X'),
+            createPlayer(player2.value, 'O'),
         ]
         currentPlayerIndex = 0
         gameOver = false
@@ -68,6 +67,10 @@ const Game = (() => {
         squares.forEach((square) => {
             square.addEventListener('click', handleClick);
         })
+        restartBtn.style.display = 'inline'
+        startBtn.style.display = 'none'
+        player1.style.display = 'none'
+        player2.style.display = 'none'
     }
 
     const handleClick = (event) => {
@@ -85,6 +88,8 @@ const Game = (() => {
         if (checkForWin(GameBoard.getGameboard(), players[currentPlayerIndex].mark)) {
             gameOver = true
             displayController.renderMessage(`${players[currentPlayerIndex].name} wins!`)
+            player1.style.display = 'inline'
+            player2.style.display = 'inline'
         } else if (checkForTie(GameBoard.getGameboard())) {
             gameOver = true
             displayController.renderMessage(`It's a tie!`)
@@ -97,10 +102,16 @@ const Game = (() => {
         for (let i = 0; i < 9; i++) {
             GameBoard.update(i, '')
         }
+        players = [
+            createPlayer(player1.value, 'X'),
+            createPlayer(player2.value, 'O'),
+        ]
         GameBoard.render()
         displayController.renderMessage('')
         gameOver = false
         currentPlayerIndex = 0
+        player1.style.display = 'none'
+        player2.style.display = 'none'
     }
     
     return {
@@ -134,8 +145,8 @@ function checkForTie(board) {
     return board.every(cell => cell !== '')
 }
 
-const restartButton = document.querySelector('#restart-button')
-restartButton.addEventListener('click', () => {
+const restartBtn = document.querySelector('#restart-button')
+restartBtn.addEventListener('click', () => {
     Game.restart()
 })
 
